@@ -1,0 +1,29 @@
+{
+  "name": "sixhats",
+  "version": "1.0.0",
+  "author": "4xxi Software LTD",
+  "license": "MIT",
+  "scripts": {
+    "dev": "./node_modules/.bin/next dev",
+    "build": "./node_modules/.bin/next build",
+    "start": "./node_modules/.bin/next start"
+  },
+  "dependencies": {
+    "@atlaskit/theme": "^9.2.3",
+    "@material-ui/core": "^4.4.3",
+    "@material-ui/styles": "^4.4.3",
+    "firebase": "^6.6.2",
+    "next": "^9.0.6",
+    "react": "^16.9.0",
+    "react-beautiful-dnd": "^11.0.5",
+    "react-dom": "^16.9.0",
+    "react-redux": "^7.1.1",
+    "react-redux-firebase": "^3.0.0-beta.2",
+    "redux": "^4.0.4",
+    "styled-components": "^4.4.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.4.0",
+    "prettier": "^1.18.2"
+  }
+}
