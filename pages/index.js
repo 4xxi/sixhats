@@ -1,5 +1,5 @@
 import React from 'react';
-import Board from '../src/features/Board';
+import Board from 'features/Board';
 
 const Index = () => <Board />;
 

@@ -8,10 +8,10 @@ import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
-import createStore from '../src/store';
-import { firebaseConfig } from '../src/common/constants';
-import { GlobalStyle } from '../src/common/styles/global';
-import theme from '../src/common/styles/theme';
+import createStore from 'src/store';
+import { firebaseConfig } from 'common/constants';
+import { GlobalStyle } from 'common/styles/global';
+import theme from 'common/styles/theme';
 
 const rrfConfig = {
   userProfile: 'users'
