@@ -95,9 +95,7 @@ class Board extends React.Component {
   render() {
     const { columns, ordered } = this.state;
     const { isCombineEnabled, withScrollableColumns } = this.props;
-    //const { containerHeight } = this.props;
     const { containerHeight } = 600;
-    console.log(this.props);
 
     const board = (
       <Droppable
@@ -141,10 +139,9 @@ class Board extends React.Component {
 
 export default compose(
   firebaseConnect([
-    'items' // { path: '/todos' } // object notation
+    'items'
   ]),
   connect(state => ({
     items: state
-    // profile: state.firebase.profile // load profile
   }))
 )(Board);
