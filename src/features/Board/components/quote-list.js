@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { colors } from '@atlaskit/theme';
+import { grey, cyan, pink } from '@material-ui/core/colors';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import QuoteItem from './quote-item';
 import Title from './title';
@@ -10,17 +10,17 @@ const getBackgroundColor = (
   isDraggingFrom,
 ) => {
   if (isDraggingOver) {
-    return colors.R50;
+    return pink[50];
   }
   if (isDraggingFrom) {
-    return colors.T50;
+    return cyan[50];
   }
-  return colors.N30;
+  return grey[300];
 };
 
 const Wrapper = styled.div`
   background-color: ${props =>
-  getBackgroundColor(props.isDraggingOver, props.isDraggingFrom)};
+    getBackgroundColor(props.isDraggingOver, props.isDraggingFrom)};
   display: flex;
   flex-direction: column;
   opacity: ${({ isDropDisabled }) => (isDropDisabled ? 0.5 : 'inherit')};

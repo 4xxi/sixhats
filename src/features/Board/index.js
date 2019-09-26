@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { colors } from '@atlaskit/theme';
+import { blue } from '@material-ui/core/colors';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
@@ -16,7 +16,7 @@ const ParentContainer = styled.div`
 `;
 
 const Container = styled.div`
-  background-color: ${colors.B100};
+  background-color: ${blue[500]};
   min-height: 100vh;
   min-width: 100vw;
   display: inline-flex;
@@ -96,7 +96,7 @@ class Board extends React.Component {
     const { columns, ordered } = this.state;
     const { isCombineEnabled, withScrollableColumns } = this.props;
     const { containerHeight } = 600;
-
+    console.log(this.props);
     const board = (
       <Droppable
         droppableId="board"
@@ -139,9 +139,11 @@ class Board extends React.Component {
 
 export default compose(
   firebaseConnect([
-    'items'
+    {
+      path: 'db'
+    }
   ]),
   connect(state => ({
-    items: state
+    db: state
   }))
 )(Board);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { colors } from '@atlaskit/theme';
+import { grey, cyan } from '@material-ui/core/colors';
 import { Draggable } from 'react-beautiful-dnd';
 import QuoteList from './components/quote-list';
 import Title from './components/title';
@@ -18,10 +18,10 @@ const Header = styled.div`
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
   background-color: ${({ isDragging }) =>
-    isDragging ? colors.G50 : colors.N30};
+    isDragging ? cyan[50] : grey[300]};
   transition: background-color 0.2s ease;
   &:hover {
-    background-color: ${colors.G50};
+    background-color: ${cyan[50]};
   }
 `;
 
@@ -45,7 +45,7 @@ export default class Column extends Component {
               listId={title}
               listType="QUOTE"
               style={{
-                backgroundColor: snapshot.isDragging ? colors.G50 : null,
+                backgroundColor: snapshot.isDragging ? cyan[50] : null,
               }}
               quotes={quotes}
               internalScroll={this.props.isScrollable}

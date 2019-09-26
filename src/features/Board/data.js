@@ -1,4 +1,4 @@
-import { colors } from '@atlaskit/theme';
+import { amber, blueGrey, blue, cyan } from '@material-ui/core/colors';
 
 const jake = {
   id: '1',
@@ -6,8 +6,8 @@ const jake = {
   url: 'http://adventuretime.wikia.com/wiki/Jake',
   avatarUrl: '/static/images/jake.png',
   colors: {
-    soft: colors.Y50,
-    hard: colors.Y200,
+    soft: amber[50],
+    hard: amber[200],
   },
 };
 
@@ -17,8 +17,8 @@ const BMO = {
   url: 'http://adventuretime.wikia.com/wiki/BMO',
   avatarUrl: '/static/images/bmo.png',
   colors: {
-    soft: colors.G50,
-    hard: colors.G200,
+    soft: blueGrey[50],
+    hard: blueGrey[200],
   },
 };
 
@@ -28,8 +28,8 @@ const finn = {
   url: 'http://adventuretime.wikia.com/wiki/Finn',
   avatarUrl: '/static/images/finn.png',
   colors: {
-    soft: colors.B50,
-    hard: colors.B200,
+    soft: blue[50],
+    hard: blue[200],
   },
 };
 
@@ -39,8 +39,8 @@ const princess = {
   url: 'http://adventuretime.wikia.com/wiki/Princess_Bubblegum',
   avatarUrl: '/static/images/princess.png',
   colors: {
-    soft: colors.P50,
-    hard: colors.P200,
+    soft: cyan[50],
+    hard: cyan[200],
   },
 };
 
@@ -110,12 +110,11 @@ export const quotes = [
   },
 ];
 
-// So we do not have any clashes with our hardcoded ones
 let idCount = quotes.length + 1;
 
 export const getAuthors = count =>
   Array.from({ length: count }, (v, k) => k).map(() => {
-    const random= authors[Math.floor(Math.random() * authors.length)];
+    const random = authors[Math.floor(Math.random() * authors.length)];
 
     const custom= {
       ...random,

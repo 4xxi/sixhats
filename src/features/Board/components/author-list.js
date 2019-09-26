@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import styled from '@emotion/styled';
-import { colors } from '@atlaskit/theme';
+import styled from 'styled-components';
+import { blue } from '@material-ui/core/colors';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import Author from './author-item';
-import { grid } from '../constants';
+
+const grid = 8;
 
 const Wrapper = styled.div`
   background-color: ${({ isDraggingOver }) =>
-  isDraggingOver ? colors.B50 : colors.B75};
+    isDraggingOver ? blue[50] : blue[100]};
   display: flex;
   flex-direction: column;
   padding: ${grid}px;
@@ -18,14 +19,8 @@ const Wrapper = styled.div`
 
 const DropZone = styled.div`
   display: flex;
-  /*
-    Needed to avoid growth in list due to lifting the first item
-    Caused by display: inline-flex strangeness
-  */
   align-items: start;
-  /* stop the list collapsing when empty */
   min-width: 600px;
-  /* stop the list collapsing when it has no items */
   min-height: 60px;
 `;
 
@@ -34,12 +29,7 @@ const ScrollContainer = styled.div`
 `;
 
 const Container = styled.div`
-  /* flex child */
   flex-grow: 1;
-  /*
-    flex parent
-    needed to allow width to grow greater than body
-  */
   display: inline-flex;
 `;
 

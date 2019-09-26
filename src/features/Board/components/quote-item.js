@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { colors } from '@atlaskit/theme';
+import { grey, cyan, indigo } from '@material-ui/core/colors';
 
 const grid = 8;
 
@@ -14,10 +14,10 @@ const getBackgroundColor = (
   }
 
   if (isGroupedOver) {
-    return colors.N30;
+    return cyan[50];
   }
 
-  return colors.N0;
+  return '#fff';
 };
 
 const getBorderColor = (isDragging, authorColors) =>
@@ -28,20 +28,20 @@ const Container = styled.a`
   border: 2px solid transparent;
   border-color: ${props => getBorderColor(props.isDragging, props.colors)};
   background-color: ${props =>
-  getBackgroundColor(props.isDragging, props.isGroupedOver, props.colors)};
+    getBackgroundColor(props.isDragging, props.isGroupedOver, props.colors)};
   box-shadow: ${({ isDragging }) =>
-  isDragging ? `2px 2px 1px ${colors.N70}` : 'none'};
+    isDragging ? `2px 2px 1px ${grey[400]}` : 'none'};
   padding: ${grid}px;
   min-height: 40px;
   margin-bottom: ${grid}px;
   user-select: none;
   text-decoration: none;
 
-  color: ${colors.N900};
+  color: ${indigo[900]};
 
   &:hover,
   &:active {
-    color: ${colors.N900};
+    color: ${indigo[900]};
     text-decoration: none;
   }
 
