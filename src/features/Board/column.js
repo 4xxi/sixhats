@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { colors } from '@atlaskit/theme';
 import { Draggable } from 'react-beautiful-dnd';
-import QuoteList from './primatives/quote-list';
-import Title from './primatives/title';
+import QuoteList from './components/quote-list';
+import Title from './components/title';
 
 const Container = styled.div`
   margin: 10px;
