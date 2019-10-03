@@ -1,6 +1,7 @@
 import React from 'react';
-import Board from 'features/Board';
+import Entry from 'features/Entry';
+import Login from 'features/Login';
 
-const Index = () => <Board />;
+const Index = () => <Login />;
 
 export default Index;

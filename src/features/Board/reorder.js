@@ -8,6 +8,8 @@ const reorder = (list, startIndex, endIndex) => {
 
 export default reorder;
 
+const saveArray = arr => !arr.length ? '' : arr;
+
 export const reorderQuoteMap = ({
   quoteMap,
   source,
@@ -37,7 +39,7 @@ export const reorderQuoteMap = ({
 
   const result = {
     ...quoteMap,
-    [source.droppableId]: current,
+    [source.droppableId]: saveArray(current),
     [destination.droppableId]: next,
   };
 

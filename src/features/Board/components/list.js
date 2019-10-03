@@ -1,42 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
-import { grey, cyan, pink } from '@material-ui/core/colors';
+import { grey } from '@material-ui/core/colors';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
-import QuoteItem from './quote-item';
-import Title from './title';
-
-const getBackgroundColor = (
-  isDraggingOver,
-  isDraggingFrom,
-) => {
-  if (isDraggingOver) {
-    return pink[50];
-  }
-  if (isDraggingFrom) {
-    return cyan[50];
-  }
-  return grey[300];
-};
+import Card from './card';
 
 const Wrapper = styled.div`
-  background-color: ${props =>
-    getBackgroundColor(props.isDraggingOver, props.isDraggingFrom)};
   display: flex;
   flex-direction: column;
   opacity: ${({ isDropDisabled }) => (isDropDisabled ? 0.5 : 'inherit')};
   padding: 8px;
-  border: 8px;
   padding-bottom: 0;
   transition: background-color 0.2s ease, opacity 0.1s ease;
   user-select: none;
-  width: 250px;
 `;
 
 const scrollContainerHeight = 250;
 
 const DropZone = styled.div`
   min-height: ${scrollContainerHeight}px;
-  padding-bottom: 15px;
 `;
 
 const ScrollContainer = styled.div`
@@ -47,18 +28,32 @@ const ScrollContainer = styled.div`
 
 const Container = styled.div``;
 
+const Title = styled.h4`
+  margin: 0;
+  padding: 8px;
+  transition: background-color ease 0.2s;
+  flex-grow: 1;
+  user-select: none;
+  position: relative;
+  &:focus {
+    outline: 2px solid #ccc;
+    outline-offset: 2px;
+  }
+`;
+
 const InnerQuoteList = React.memo(function InnerQuoteList(
   props,
 ) {
-  return props.quotes.map((quote, index) => (
-    <Draggable key={quote.id} draggableId={quote.id} index={index}>
+  return props.cards.map((card, index) => (
+    <Draggable key={card.id} draggableId={card.id} index={index}>
       {(
         dragProvided,
         dragSnapshot,
       ) => (
-        <QuoteItem
-          key={quote.id}
-          quote={quote}
+        <Card
+          key={card.id}
+          quote={card}
+          hat={props.hat}
           isDragging={dragSnapshot.isDragging}
           isGroupedOver={Boolean(dragSnapshot.combineTargetFor)}
           provided={dragProvided}
@@ -69,21 +64,21 @@ const InnerQuoteList = React.memo(function InnerQuoteList(
 });
 
 function InnerList(props) {
-  const { quotes, dropProvided } = props;
+  const { cards, dropProvided, hat } = props;
   const title = props.title ? <Title>{props.title}</Title> : null;
 
   return (
     <Container>
       {title}
       <DropZone ref={dropProvided.innerRef}>
-        <InnerQuoteList quotes={quotes} />
+        <InnerQuoteList cards={cards} hat={hat} />
         {dropProvided.placeholder}
       </DropZone>
     </Container>
   );
 }
 
-export default function QuoteList(props) {
+export default function List(props) {
   const {
     ignoreContainerClipping,
     internalScroll,
@@ -93,8 +88,9 @@ export default function QuoteList(props) {
     listId = 'LIST',
     listType,
     style,
-    quotes,
+    cards,
     title,
+    hat,
   } = props;
 
   return (
@@ -111,6 +107,7 @@ export default function QuoteList(props) {
       ) => (
         <Wrapper
           style={style}
+          color={hat.color}
           isDraggingOver={dropSnapshot.isDraggingOver}
           isDropDisabled={isDropDisabled}
           isDraggingFrom={Boolean(dropSnapshot.draggingFromThisWith)}
@@ -119,14 +116,16 @@ export default function QuoteList(props) {
           {internalScroll ? (
             <ScrollContainer style={scrollContainerStyle}>
               <InnerList
-                quotes={quotes}
+                hat={hat}
+                cards={cards}
                 title={title}
                 dropProvided={dropProvided}
               />
             </ScrollContainer>
           ) : (
             <InnerList
-              quotes={quotes}
+              hat={hat}
+              cards={cards}
               title={title}
               dropProvided={dropProvided}
             />

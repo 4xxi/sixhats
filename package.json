@@ -4,9 +4,9 @@
   "author": "4xxi Software LTD",
   "license": "MIT",
   "scripts": {
-    "dev": "./node_modules/.bin/next dev",
+    "dev": "node server.js",
     "build": "./node_modules/.bin/next build",
-    "start": "./node_modules/.bin/next start"
+    "start": "NODE_ENV=production node server.js"
   },
   "dependencies": {
     "@material-ui/core": "^4.4.3",
@@ -15,13 +15,18 @@
     "babel-plugin-import": "^1.12.2",
     "firebase": "^6.6.2",
     "next": "^9.0.6",
+    "path-match": "^1.2.4",
     "react": "^16.9.0",
     "react-beautiful-dnd": "^11.0.5",
     "react-dom": "^16.9.0",
+    "react-google-button": "^0.5.3",
     "react-redux": "^7.1.1",
     "react-redux-firebase": "^3.0.0-beta.2",
     "redux": "^4.0.4",
-    "styled-components": "^4.4.0"
+    "redux-observable": "^1.2.0",
+    "redux-saga": "^1.1.1",
+    "styled-components": "^4.4.0",
+    "uuid": "^3.3.3"
   },
   "devDependencies": {
     "babel-plugin-module-resolver": "^3.2.0",

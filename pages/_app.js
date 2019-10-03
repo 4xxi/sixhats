@@ -14,7 +14,15 @@ import { GlobalStyle } from 'common/styles/global';
 import theme from 'common/styles/theme';
 
 const rrfConfig = {
-  userProfile: 'users'
+  userProfile: 'users',
+  profileParamsToPopulate: [
+    { child: 'role', root: 'roles' },
+  ],
+  profileFactory: user => ({
+    email: user.email || user.providerData[0].email,
+    role: 'user',
+    providerData: user.providerData
+  })
 };
 
 if (!firebase.apps.length) {
