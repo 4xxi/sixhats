@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  pushData: actions.pushData,
+  updateData: actions.updateData,
 };
 
 export const BoardContainer = compose(

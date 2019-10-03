@@ -5,7 +5,7 @@ import uuid from 'uuid';
 import Column from './column';
 import reorder, { reorderQuoteMap } from './reorder';
 import { authorQuoteMap } from './data';
-import { hats } from './hats';
+import { hats } from 'common/constants';
 
 const ParentContainer = styled.div`
   height: ${({ height }) => height};
@@ -114,9 +114,9 @@ class Board extends React.Component {
   };
 
   updateData = data => {
-    const { boardId, pushData } = this.props;
+    const { boardId, updateData } = this.props;
 
-    pushData({
+    updateData({
       path: `/rooms/${boardId}/hats/${this.getProgramId()}`,
       data,
     });

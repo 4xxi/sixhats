@@ -11,6 +11,7 @@ import {
   MenuItem,
   InputLabel,
 } from '@material-ui/core';
+import ProgramForm from './ProgramForm';
 
 const Wrapper = styled.div`
   width: 300px;
@@ -65,6 +66,15 @@ class Entry extends React.Component {
     }
   };
 
+  addProgram = data => {console.log(data);
+    const { auth, createProgram } = this.props;
+
+    createProgram({
+      uid: auth.uid,
+      data,
+    });
+  };
+
   render() {
     const { code, program } = this.state;
     const { programs } = this.props;
@@ -83,7 +93,7 @@ class Entry extends React.Component {
           </StyledFormControl>
         </Block>
         <Block>
-          <BlockTitle>or create your own</BlockTitle>
+          <BlockTitle>or create your own room</BlockTitle>
           <StyledFormControl>
             <InputLabel htmlFor="choose-program">
               Choose a program
@@ -102,12 +112,12 @@ class Entry extends React.Component {
                 </MenuItem>
               ))}
             </Select>
-
           </StyledFormControl>
         </Block>
         <Button color="primary" variant="contained" onClick={this.onCreate}>
           Next
         </Button>
+        <ProgramForm addProgram={this.addProgram}/>
       </Wrapper>
     );
   }

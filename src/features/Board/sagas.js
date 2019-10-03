@@ -14,7 +14,7 @@ function* createBoardSaga({ data }) {
   }
 }
 
-function* pushDataToPathSaga({ data }) {
+function* updateDataSaga({ data }) {
   try {
     yield getFirebase().set(data.path,  data.data);
   } catch (error) {
@@ -22,9 +22,18 @@ function* pushDataToPathSaga({ data }) {
   }
 }
 
+function* createProgramSaga({ data }) {console.log(data);
+  try {
+    yield getFirebase().push(`/users/${data.uid}/programs`,  data.data);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 function* watchBoardSaga() {
   yield takeLatest(types.CREATE_BOARD, createBoardSaga);
-  yield takeLatest(types.PUSH_DATA, pushDataToPathSaga);
+  yield takeLatest(types.UPDATE_DATA, updateDataSaga);
+  yield takeLatest(types.CREATE_PROGRAM, createProgramSaga);
 }
 
 export default watchBoardSaga;
