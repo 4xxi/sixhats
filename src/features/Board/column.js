@@ -3,13 +3,14 @@ import styled from 'styled-components';
 import { Button, TextField, Tooltip } from '@material-ui/core';
 import { cyan, grey } from '@material-ui/core/colors';
 import { Draggable } from 'react-beautiful-dnd';
+import { CARD_WIDTH } from 'common/constants';
 import List from './components/list';
 
 const Container = styled.div`
   margin: 10px;
   display: flex;
   flex-direction: column;
-  width: 240px;
+  width: ${CARD_WIDTH}px;
   border: 4px solid ${({ color }) => color};
   border-radius: 4px;
 `;
