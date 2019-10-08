@@ -14,7 +14,7 @@ const ParentContainer = styled.div`
 `;
 
 const Container = styled.div`
-  min-height: 100vh;
+  min-height: calc(100vh - 70px);
   min-width: 100vw;
   display: inline-flex;
 `;
@@ -138,7 +138,6 @@ class Board extends React.Component {
     }
 
     const program = programs[this.getProgramId()];
-console.log(hats[program.hats[0]]);
     const columns = this.extractColumns();
     const board = (
       <Droppable

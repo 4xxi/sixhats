@@ -1,5 +1,5 @@
 import React from 'react';
-import App, { Container } from 'next/app';
+import App from 'next/app';
 import Head from 'next/head';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import { CssBaseline } from '@material-ui/core';
@@ -48,7 +48,7 @@ class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props;
     return (
-      <Container>
+      <>
         <Head>
           <title>Six Hats</title>
         </Head>
@@ -61,7 +61,7 @@ class MyApp extends App {
           </ReactReduxFirebaseProvider>
         </Provider>
         <GlobalStyle />
-      </Container>
+      </>
   );
   }
 }

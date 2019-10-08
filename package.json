@@ -13,6 +13,7 @@
     "@material-ui/styles": "^4.4.3",
     "babel-loader": "^8.0.6",
     "babel-plugin-import": "^1.12.2",
+    "dotenv": "^8.1.0",
     "firebase": "^6.6.2",
     "next": "^9.0.6",
     "path-match": "^1.2.4",

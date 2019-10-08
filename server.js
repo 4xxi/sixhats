@@ -3,6 +3,14 @@ const { parse } = require('url');
 const next = require('next');
 const pathMatch = require('path-match');
 
+const envFile = '.env';
+
+if (require('fs').existsSync(envFile)) {
+  require('dotenv').config({
+    path: '.env',
+  });
+}
+
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });

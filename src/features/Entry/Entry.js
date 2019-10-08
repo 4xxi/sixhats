@@ -11,7 +11,6 @@ import {
   MenuItem,
   InputLabel,
 } from '@material-ui/core';
-import ProgramForm from './ProgramForm';
 
 const Wrapper = styled.div`
   width: 300px;
@@ -117,7 +116,6 @@ class Entry extends React.Component {
         <Button color="primary" variant="contained" onClick={this.onCreate}>
           Next
         </Button>
-        <ProgramForm addProgram={this.addProgram}/>
       </Wrapper>
     );
   }
