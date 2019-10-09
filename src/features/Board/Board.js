@@ -173,7 +173,7 @@ class Board extends React.Component {
   };
 
   render() {
-    const { isCombineEnabled, withScrollableColumns, programs, rooms } = this.props;
+    const { isCombineEnabled, withScrollableColumns, programs, rooms, t } = this.props;
     const { containerHeight } = 600;
 
     if (!rooms || !programs) {
@@ -202,6 +202,7 @@ class Board extends React.Component {
                 isScrollable={withScrollableColumns}
                 isCombineEnabled={isCombineEnabled}
                 addCard={this.addCard}
+                t={t}
               />
             ))}
             {provided.placeholder}

@@ -1,35 +1,26 @@
-const { createServer } = require('http');
-const { parse } = require('url');
+const express = require('express');
 const next = require('next');
-const pathMatch = require('path-match');
+const nextI18NextMiddleware = require('next-i18next/middleware').default;
+const nextI18next = require('./i18n');
 
-const envFile = '.env';
-
-if (require('fs').existsSync(envFile)) {
-  require('dotenv').config({
-    path: '.env',
-  });
-}
-
-const port = parseInt(process.env.PORT, 10) || 3000;
-const dev = process.env.NODE_ENV !== 'production';
-const app = next({ dev });
+const port = process.env.PORT || 3000;
+const app = next({ dev: process.env.NODE_ENV !== 'production' });
 const handle = app.getRequestHandler();
-const route = pathMatch();
-const match = route('/board/:id');
 
-app.prepare().then(() => {
-  createServer((req, res) => {
-    const { pathname, query } = parse(req.url, true);
-    const params = match(pathname);
-    if (params === false) {
-      handle(req, res);
-      return;
-    }
+(async () => {
+  await app.prepare();
+  const server = express();
 
-    app.render(req, res, '/board', Object.assign(params, query));
-  }).listen(port, err => {
-    if (err) throw err;
-    console.log(`> Ready on http://localhost:${port}`)
-  })
-});
+  server.use(nextI18NextMiddleware(nextI18next));
+
+  server.get('/board/:id', (req, res) => {
+    const queryParams = { id: req.params.id };
+
+    app.render(req, res, '/board', queryParams);
+  });
+
+  server.get('*', (req, res) => handle(req, res));
+
+  await server.listen(port);
+  console.log(`> Ready on http://localhost:${port}`);
+})();

@@ -1,0 +1,13 @@
+{
+  "checkAuth": "Check authorization...",
+  "signIn": "Sign In",
+  "joinRoom": "Join room",
+  "createRoom": "or create your own room",
+  "chooseProgram": "Choose a program",
+  "next": "Next",
+  "code": "Code",
+  "createCard": "Create card",
+  "cardText": "Card text",
+  "cancel": "Cancel",
+  "send": "Send"
+}

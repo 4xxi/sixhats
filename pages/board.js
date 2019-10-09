@@ -1,16 +1,20 @@
 import React from 'react';
 import { Board } from 'features/Board';
+import { withTranslation } from '../i18n';
 
 class BoardPage extends React.Component {
   static getInitialProps ({ query: { id } }) {
-    return { id };
+    return {
+      id,
+      namespacesRequired: ['common'],
+    };
   }
 
   render() {
-    const { id } = this.props;
+    const { id, t } = this.props;
 
-    return <Board boardId={id} />;
+    return <Board boardId={id} t={t} />;
   }
 }
 
-export default BoardPage;
+export default withTranslation('common')(BoardPage);

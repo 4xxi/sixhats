@@ -12,6 +12,7 @@ import createStore from 'src/store';
 import { firebaseConfig } from 'common/constants';
 import { GlobalStyle } from 'common/styles/global';
 import theme from 'common/styles/theme';
+import { appWithTranslation } from '../i18n';
 
 const rrfConfig = {
   userProfile: 'users',
@@ -66,4 +67,4 @@ class MyApp extends App {
   }
 }
 
-export default MyApp;
+export default appWithTranslation(MyApp);

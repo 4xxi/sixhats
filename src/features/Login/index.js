@@ -48,17 +48,17 @@ class Login extends React.Component {
   };
 
   render() {
-    const { auth } = this.props;
+    const { auth, t } = this.props;
     const { error } = this.state;
     let content = null;
 
     if (!isLoaded(auth)) {
-      content = <span>Check authorization...</span>;
+      content = <span>{t('checkAuth')}</span>;
     } else {
       if (isEmpty(auth)) {
-        content = <Button onClick={this.signIn}>Sign In</Button>;
+        content = <Button onClick={this.signIn}>{t('signIn')}</Button>;
       } else {
-        content = <Entry />;
+        content = <Entry t={t} />;
       }
     }
 

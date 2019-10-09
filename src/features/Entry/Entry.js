@@ -76,15 +76,15 @@ class Entry extends React.Component {
 
   render() {
     const { code, program } = this.state;
-    const { programs } = this.props;
+    const { programs, t } = this.props;
 
     return (
       <Wrapper>
         <Block>
-          <BlockTitle>Join room</BlockTitle>
+          <BlockTitle>{t('joinRoom')}</BlockTitle>
           <StyledFormControl>
             <TextField
-              label="Code"
+              label={t('code')}
               value={code}
               name="code"
               onChange={this.onChange}
@@ -92,10 +92,10 @@ class Entry extends React.Component {
           </StyledFormControl>
         </Block>
         <Block>
-          <BlockTitle>or create your own room</BlockTitle>
+          <BlockTitle>{t('createRoom')}</BlockTitle>
           <StyledFormControl>
             <InputLabel htmlFor="choose-program">
-              Choose a program
+              {t('chooseProgram')}
             </InputLabel>
             <Select
               value={program}
@@ -114,7 +114,7 @@ class Entry extends React.Component {
           </StyledFormControl>
         </Block>
         <Button color="primary" variant="contained" onClick={this.onCreate}>
-          Next
+          {t('next')}
         </Button>
       </Wrapper>
     );
