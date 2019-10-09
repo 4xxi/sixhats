@@ -1,11 +1,11 @@
 import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { Paper } from '@material-ui/core';
+import { Paper, Button } from '@material-ui/core';
+import { red } from '@material-ui/core/colors';
 import { getFirebase } from 'react-redux-firebase'
 import { withFirebase, isLoaded, isEmpty } from 'react-redux-firebase';
 import styled from 'styled-components';
-import GoogleButton from 'react-google-button';
 import { Entry } from 'features/Entry';
 
 const StyledPaper = styled(Paper)`
@@ -24,21 +24,46 @@ const Wrapper = styled.div`
   justify-content: center;
 `;
 
+const Error = styled.div`
+  text-align: center;
+  color: ${red[200]};
+`;
+
 class Login extends React.Component {
-  loginWithGoogle = () => this.props.firebase.login({ provider: 'google', type: 'popup' });
+  state = {
+    error: null,
+  };
+
+  signIn = () => {
+    const { firebase } = this.props;
+
+    firebase.auth().signInAnonymously().catch(error => {
+      this.setState({
+        error: error.message
+      });
+    });
+
+    firebase.auth().onAuthStateChanged(user => {
+    });
+  };
 
   render() {
-    const { auth } = this.props;
+    const { auth, t } = this.props;
+    const { error } = this.state;
     let content = null;
 
     if (!isLoaded(auth)) {
-      content = <span>Check authorization...</span>;
+      content = <span>{t('checkAuth')}</span>;
     } else {
       if (isEmpty(auth)) {
-        content = <GoogleButton onClick={this.loginWithGoogle} />;
+        content = <Button onClick={this.signIn}>{t('signIn')}</Button>;
       } else {
-        content = <Entry />;
+        content = <Entry t={t} />;
       }
+    }
+
+    if (error) {
+      content = <Error>{error}</Error>;
     }
 
     return (

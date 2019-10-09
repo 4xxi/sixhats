@@ -1,13 +1,19 @@
 const CREATE_BOARD = 'board/CREATE_ROOM';
-const PUSH_DATA = 'board/PUSH_DATA';
+const CREATE_PROGRAM = 'board/CREATE_PROGRAM';
+const UPDATE_DATA = 'board/UPDATE_DATA';
 
 const createBoard = data => ({
   type: CREATE_BOARD,
   data,
 });
 
-const pushData = data => ({
-  type: PUSH_DATA,
+const createProgram = data => ({
+  type: CREATE_PROGRAM,
+  data,
+});
+
+const updateData = data => ({
+  type: UPDATE_DATA,
   data,
 });
 
@@ -18,7 +24,8 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case CREATE_BOARD:
-    case PUSH_DATA:
+    case CREATE_PROGRAM:
+    case UPDATE_DATA:
       return {
         ...state,
       };
@@ -29,12 +36,14 @@ export default (state = initialState, action) => {
 
 const actions = {
   createBoard,
-  pushData,
+  createProgram,
+  updateData,
 };
 
 const types = {
-  PUSH_DATA,
+  UPDATE_DATA,
   CREATE_BOARD,
+  CREATE_PROGRAM,
 };
 
 export { types, actions };

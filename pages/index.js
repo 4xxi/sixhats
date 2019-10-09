@@ -1,7 +1,11 @@
 import React from 'react';
-import Entry from 'features/Entry';
 import Login from 'features/Login';
+import { withTranslation } from '../i18n';
 
-const Index = () => <Login />;
+const LoginPage = props => <Login {...props} />;
 
-export default Index;
+LoginPage.getInitialProps = async () => ({
+  namespacesRequired: ['common'],
+});
+
+export default withTranslation('common')(LoginPage);

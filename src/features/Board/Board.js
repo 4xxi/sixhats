@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import uuid from 'uuid';
+import { CARD_WIDTH, hats } from 'common/constants';
 import Column from './column';
 import reorder, { reorderQuoteMap } from './reorder';
 import { authorQuoteMap } from './data';
-import { hats } from './hats';
 
 const ParentContainer = styled.div`
   height: ${({ height }) => height};
@@ -14,7 +14,7 @@ const ParentContainer = styled.div`
 `;
 
 const Container = styled.div`
-  min-height: 100vh;
+  min-height: calc(100vh - 70px);
   min-width: 100vw;
   display: inline-flex;
 `;
@@ -32,6 +32,49 @@ class Board extends React.Component {
     columns: initial,
     ordered: Object.keys(initial),
   };
+
+  componentDidUpdate(prevProps) {
+    if (this.props.rooms && prevProps.rooms) {
+      const { boardId, rooms } = prevProps;
+      const programId = this.getProgramId();
+      const oldHats = rooms[boardId].hats[programId];
+      const newHats = this.props.rooms[boardId].hats[programId];
+      let updatedIndex = -1;
+      let index = 0;
+
+      for (let key in newHats) {
+        if (this.isHatChanged(oldHats[key], newHats[key])) {
+          updatedIndex = index;
+          break;
+        }
+        index++;
+      }
+
+      if (updatedIndex > -1) {
+        window.scrollTo(updatedIndex * CARD_WIDTH, 0);
+      }
+    }
+  }
+
+  isHatChanged = (oldHat, newHat) => {
+    if (typeof oldHat !== typeof newHat) {
+      return true;
+    }
+
+    if (Array.isArray(newHat)) {
+      if (oldHat.length !== newHat.length) {
+        return true;
+      }
+
+      if (this.getFullIdString(newHat) !== this.getFullIdString(oldHat)) {
+        return true;
+      }
+    }
+
+    return false;
+  };
+
+  getFullIdString = cards => cards.reduce((prev, current) => prev + current.id, '');
 
   extractColumns = () => {
     const { rooms } = this.props;
@@ -114,9 +157,9 @@ class Board extends React.Component {
   };
 
   updateData = data => {
-    const { boardId, pushData } = this.props;
+    const { boardId, updateData } = this.props;
 
-    pushData({
+    updateData({
       path: `/rooms/${boardId}/hats/${this.getProgramId()}`,
       data,
     });
@@ -130,7 +173,7 @@ class Board extends React.Component {
   };
 
   render() {
-    const { isCombineEnabled, withScrollableColumns, programs, rooms } = this.props;
+    const { isCombineEnabled, withScrollableColumns, programs, rooms, t } = this.props;
     const { containerHeight } = 600;
 
     if (!rooms || !programs) {
@@ -138,7 +181,6 @@ class Board extends React.Component {
     }
 
     const program = programs[this.getProgramId()];
-console.log(hats[program.hats[0]]);
     const columns = this.extractColumns();
     const board = (
       <Droppable
@@ -160,6 +202,7 @@ console.log(hats[program.hats[0]]);
                 isScrollable={withScrollableColumns}
                 isCombineEnabled={isCombineEnabled}
                 addCard={this.addCard}
+                t={t}
               />
             ))}
             {provided.placeholder}
