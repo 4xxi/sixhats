@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import Router from 'next/router';
+import { Button } from '@material-ui/core';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import uuid from 'uuid';
 import { CARD_WIDTH, hats } from 'common/constants';
@@ -19,10 +21,16 @@ const Container = styled.div`
   display: inline-flex;
 `;
 
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+`;
+
 const ProgramName = styled.div`
   font-size: 16px;
   font-weight: bold;
-  padding: 15px;
 `;
 
 const initial = authorQuoteMap;
@@ -172,6 +180,10 @@ class Board extends React.Component {
     return Object.keys(room.hats)[0];
   };
 
+  logout = () => {
+    Router.push('/');
+  };
+
   render() {
     const { isCombineEnabled, withScrollableColumns, programs, rooms, t } = this.props;
     const { containerHeight } = 600;
@@ -213,7 +225,18 @@ class Board extends React.Component {
 
     return (
       <>
-        <ProgramName>{program.name}</ProgramName>
+        <Header>
+          <ProgramName>{program.name}</ProgramName>
+          <Button
+            color="primary"
+            variant="contained"
+            size="small"
+            onClick={this.logout}
+          >
+            {t('logout')}
+          </Button>
+        </Header>
+
         <DragDropContext onDragEnd={this.onDragEnd}>
           {containerHeight ? (
             <ParentContainer height={containerHeight}>{board}</ParentContainer>

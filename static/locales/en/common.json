@@ -1,6 +1,5 @@
 {
-  "checkAuth": "Check authorization...",
-  "signIn": "Sign In",
+  "checkAuth": "Authorization...",
   "joinRoom": "Join room",
   "createRoom": "or create your own room",
   "chooseProgram": "Choose a program",
@@ -9,5 +8,6 @@
   "createCard": "Create card",
   "cardText": "Card text",
   "cancel": "Cancel",
-  "send": "Send"
+  "send": "Send",
+  "logout": "Logout"
 }

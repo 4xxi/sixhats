@@ -1,10 +1,10 @@
 import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { Paper, Button } from '@material-ui/core';
+import { Paper } from '@material-ui/core';
 import { red } from '@material-ui/core/colors';
 import { getFirebase } from 'react-redux-firebase'
-import { withFirebase, isLoaded, isEmpty } from 'react-redux-firebase';
+import { withFirebase } from 'react-redux-firebase';
 import styled from 'styled-components';
 import { Entry } from 'features/Entry';
 
@@ -32,38 +32,43 @@ const Error = styled.div`
 class Login extends React.Component {
   state = {
     error: null,
+    isLoading: true,
+    isAuthorized: false,
   };
 
-  signIn = () => {
+  componentDidMount() {
     const { firebase } = this.props;
 
     firebase.auth().signInAnonymously().catch(error => {
       this.setState({
-        error: error.message
+        error: error.message,
+        isLoading: false,
       });
     });
 
     firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.setState({
+          isLoading: false,
+          isAuthorized: true,
+        });
+      }
     });
-  };
+  }
 
   render() {
-    const { auth, t } = this.props;
-    const { error } = this.state;
+    const { t } = this.props;
+    const { error, isLoading, isAuthorized } = this.state;
     let content = null;
 
-    if (!isLoaded(auth)) {
+    if (isLoading) {
       content = <span>{t('checkAuth')}</span>;
     } else {
-      if (isEmpty(auth)) {
-        content = <Button onClick={this.signIn}>{t('signIn')}</Button>;
-      } else {
+      if (isAuthorized) {
         content = <Entry t={t} />;
+      } else {
+        content = <Error>{error}</Error>;
       }
-    }
-
-    if (error) {
-      content = <Error>{error}</Error>;
     }
 
     return (
